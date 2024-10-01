@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +15,22 @@ export class AuthService {
 
   login(email: string, password: string): Observable<any> {
     return this.httpClient.post<any>(this.LOGIN_URL, {email, password}).pipe(
+      catchError(this.handleError),
       tap(response => {
         if(response.jwt) {
           this.setToken(response.jwt);
         }
       })
     )
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error.message) {
+      errorMessage = error.error.message; 
+    }
+
+    return throwError(() => new Error(errorMessage));
   }
 
   private setToken(token: string): void {

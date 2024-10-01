@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -12,10 +11,4 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrl: './header.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {
-  constructor(private authService: AuthService) {}
-
-  logout(): void {
-    this.authService.logout();
-  }
-}
+export class HeaderComponent {}

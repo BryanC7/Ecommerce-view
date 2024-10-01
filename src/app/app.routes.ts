@@ -35,6 +35,10 @@ export const routes: Routes = [
         canActivate: [AuthenticatedGuard]
     },
     {
+        path: 'register',
+        loadComponent: () => import('./business/authentication/register/register.component')
+    },
+    {
         path: '**',
         redirectTo: 'login'
     }
