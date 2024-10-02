@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { RegisterService } from '../../../core/services/register.service';
@@ -19,13 +19,24 @@ export default class RegisterComponent {
   password: string = '';
   phone: number = 0;
   registerDate: string = new Date().toLocaleDateString('en-CA');
+  errorMessage: string = '';
 
-  constructor(private registerService: RegisterService, private router: Router) {}
+  constructor(private registerService: RegisterService, private router: Router, private cdr: ChangeDetectorRef) {}
 
   register(): void {
     this.registerService.register(this.name, this.lastName, this.email, this.password, this.phone, this.registerDate).subscribe({
       next: () => this.router.navigate(['/login']),
-      error: err => console.error('Login failed', err)
+      error: (err: Error) => {
+        this.errorMessage = err.message;
+        this.autoHideError();
+        this.cdr.detectChanges(); 
+      }
     })
+  }
+
+  autoHideError(): void {
+    setTimeout(() => {
+      this.errorMessage = '';
+    }, 1000);  
   }
 }

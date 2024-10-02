@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +8,23 @@ import { Observable, tap } from 'rxjs';
 export class RegisterService {
   private REGISTER_URL = 'http://localhost:8080/auth/sign-up';
 
-  constructor(private httpClient: HttpClient, private router: Router) { }
+  constructor(private httpClient: HttpClient) { }
 
   register(name: string, lastName: string, email: string, password: string, phone: number, registerDate: string): Observable<any> {
     return this.httpClient.post<any>(
       this.REGISTER_URL, 
       {name, lastName, email, password, phone, registerDate}).pipe(
-      tap(response => console.log(response))
+        catchError(this.handleError)
     )
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    console.log(error);
+    let errorMessage = '';
+    if (error.error.message) {
+      errorMessage = error.error.message; 
+    }
+
+    return throwError(() => new Error(errorMessage));
   }
 }
