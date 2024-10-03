@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { AuthenticatedGuard } from './core/guards/authenticated.guard';
+import { RoleGuard } from './core/guards/role.guard';
 
 export const routes: Routes = [
     {
@@ -15,17 +16,20 @@ export const routes: Routes = [
             {
                 path: 'dashboard',
                 loadComponent: () => import('./business/dashboard/dashboard.component'),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, RoleGuard],
+                data: { expectedRoles: ['ROLE_ADMIN'] } 
             },
             {
                 path: 'profile',
                 loadComponent: () => import('./business/profile/profile.component'),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, RoleGuard],
+                data: { expectedRoles: ['ROLE_USER', 'ROLE_ADMIN'] } 
             },
             {
                 path: 'tables',
                 loadComponent: () => import('./business/tables/tables.component'),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, RoleGuard],
+                data: { expectedRoles: ['ROLE_ADMIN'] }
             }
         ]
     },
@@ -39,7 +43,11 @@ export const routes: Routes = [
         loadComponent: () => import('./business/authentication/register/register.component')
     },
     {
+        path: 'unauthorized',
+        loadComponent: () => import('./shared/components/unauthorized/unauthorized.component') 
+    },
+    {
         path: '**',
-        redirectTo: 'login'
+        loadComponent: () => import('./shared/components/not-found/not-found.component')
     }
 ];

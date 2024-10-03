@@ -12,7 +12,13 @@ import { AuthService } from '../../../core/services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent { 
+isAdmin: boolean = false;
+
   constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.isAdmin = this.authService.hasRole('ROLE_ADMIN');
+  }
 
   logout(): void {
     this.authService.logout();

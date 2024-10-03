@@ -13,6 +13,7 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
+  // Login
   login(email: string, password: string): Observable<any> {
     return this.httpClient.post<any>(this.LOGIN_URL, {email, password}).pipe(
       catchError(this.handleError),
@@ -24,15 +25,7 @@ export class AuthService {
     )
   }
 
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
-    if (error.error.message) {
-      errorMessage = error.error.message; 
-    }
-
-    return throwError(() => new Error(errorMessage));
-  }
-
+  // Token
   private setToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
   }
@@ -53,8 +46,46 @@ export class AuthService {
     return Date.now() < expirate;
   }
 
+  // Permissions
+  getDecodedToken(): any {
+    const token = this.getToken();
+    if (token) {
+      const payload = token.split('.')[1];
+      return JSON.parse(atob(payload));
+    }
+    return null;
+  }
+
+  getRoles(): string[] {
+    const token = this.getToken();
+    if (token) {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.authorities.split(',');
+    }
+    return [];
+  }
+
+  hasRole(role: string): boolean {
+    const decodedToken = this.getDecodedToken();
+    if (decodedToken && decodedToken.authorities) {
+      return decodedToken.authorities.includes(role);
+    }
+    return false;
+  }
+
+  // Logout
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     this.router.navigate(['/login']);
+  }
+
+  // Errors
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error.message) {
+      errorMessage = error.error.message; 
+    }
+
+    return throwError(() => new Error(errorMessage));
   }
 }

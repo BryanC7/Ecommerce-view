@@ -22,7 +22,7 @@ export default class LoginComponent {
 
   login(): void {
     this.authService.login(this.email, this.password).subscribe({
-      next: () => this.router.navigate(['/dashboard']),
+      next: () => this.router.navigate(['/profile']),
       error: (err: Error) => {
         this.errorMessage = err.message;
         this.autoHideError();
