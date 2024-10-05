@@ -1,7 +1,7 @@
-<div class="overflow-scroll text-gray-50 bg-blue-gray-700 shadow-md">
+<div class="overflow-scroll text-gray-900 bg-white shadow-md">
     <table class="w-full text-left table-auto min-w-max">
         <thead>
-            <tr class="font-semibold border-b border-slate-600 text-sm leading-none">
+            <tr class="font-semibold border-b border-slate-500 bg-slate-200 text-sm leading-none">
                 <th class="p-4">
                     <p>
                         Nombre usuario
@@ -37,7 +37,7 @@
         <tbody>
             @defer  {
                 @for (user of users; track user.id) {
-                    <tr class="text-sm border-b border-slate-700">
+                    <tr class="text-sm border-b hover:bg-slate-50 border-slate-200 text-slate-800">
                         <td class="p-4">
                             <p>
                                 {{user.name}}
@@ -63,12 +63,14 @@
                                 {{user.registerDate}}
                             </p>
                         </td>
-                        <td class="p-4 border-b border-slate-700">
+                        <td class="p-4">
                             <div class="flex w-max gap-4">
-                                <button class="rounded-md bg-amber-600 py-2 px-4 border border-transparent text-center text-sm text-gray-50 font-semibold transition-all shadow-md hover:shadow-lg focus:bg-amber-700 focus:shadow-none active:bg-amber-700 hover:bg-amber-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2" type="button">
+                                <button (click)="update()" class="rounded-md bg-amber-600 py-2 px-4 border border-transparent text-center text-sm font-bold text-slate-800 transition-all shadow-md hover:shadow-lg focus:bg-amber-700 focus:shadow-none active:bg-amber-700 hover:bg-amber-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2" type="button">
+                                    <fa-icon class="me-1.5" [icon]="faPencil"></fa-icon>
                                   Actualizar
                                 </button>
-                                <button class="rounded-md bg-red-600 py-2 px-4 border border-transparent text-center text-sm text-gray-50 font-semibold transition-all shadow-md hover:shadow-lg focus:bg-red-700 focus:shadow-none active:bg-red-700 hover:bg-red-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2" type="button">
+                                <button class="rounded-md bg-red-600 py-2 px-4 border border-transparent text-center text-sm text-white font-semibold transition-all shadow-md hover:shadow-lg focus:bg-red-700 focus:shadow-none active:bg-red-700 hover:bg-red-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2" type="button">
+                                    <fa-icon class="me-1.5" [icon]="faTrash"></fa-icon>
                                     Eliminar
                                 </button>
                               </div>
