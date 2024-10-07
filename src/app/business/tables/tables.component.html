@@ -1,79 +1,33 @@
-<div class="overflow-scroll text-gray-900 bg-white shadow-md">
-    <table class="w-full text-left table-auto min-w-max">
+<div class="flex w-full flex-col overflow-scroll rounded-xl bg-clip-border overflow-scroll text-gray-900 text-left bg-white shadow-md">
+    <table class="w-full min-w-[768px] table-auto">
         <thead>
             <tr class="font-semibold border-b border-slate-500 bg-slate-200 text-sm leading-none">
-                <th class="p-4">
-                    <p>
-                        Nombre usuario
-                    </p>
-                </th>
-                <th class="p-4">
-                    <p>
-                        Apellido usuario
-                    </p>
-                </th>
-                <th class="p-4">
-                    <p>
-                        Correo electrónico
-                    </p>
-                </th>
-                <th class="p-4">
-                    <p>
-                        Número de teléfono
-                    </p>
-                </th>
-                <th class="p-4">
-                    <p>
-                        Fecha creación
-                    </p>
-                </th>
-                <th class="p-4">
-                    <p>
-                        Acciones
-                    </p>
-                </th>
+                <th class="p-4">Nombre usuario</th>
+                <th class="p-4">Apellido usuario</th>
+                <th class="p-4">Correo electrónico</th>
+                <th class="p-4">Número de teléfono</th>
+                <th class="p-4">Fecha creación</th>
+                <th class="p-4">Acciones</th>
             </tr>
         </thead>
         <tbody>
             @defer  {
                 @for (user of users; track user.id) {
                     <tr class="text-sm border-b hover:bg-slate-50 border-slate-200 text-slate-800">
-                        <td class="p-4">
-                            <p>
-                                {{user.name}}
-                            </p>
-                        </td>
-                        <td class="p-4">
-                            <p>
-                                {{user.lastName}}
-                            </p>
-                        </td>
-                        <td class="p-4">
-                            <p>
-                                {{user.email}}
-                            </p>
-                        </td>
-                        <td class="p-4">
-                            <p>
-                                {{user.phone}}
-                            </p>
-                        </td>
-                        <td class="p-4">
-                            <p>
-                                {{user.registerDate}}
-                            </p>
-                        </td>
+                        <td class="p-4"> {{ user.name }} </td>
+                        <td class="p-4"> {{ user.lastName }} </td>
+                        <td class="p-4"> {{ user.email }} </td>
+                        <td class="p-4"> {{ user.phone }} </td>
+                        <td class="p-4"> {{ user.registerDate }} </td>
                         <td class="p-4">
                             <div class="flex w-max gap-4">
-                                <button (click)="update()" class="rounded-md bg-amber-600 py-2 px-4 border border-transparent text-center text-sm font-bold text-slate-800 transition-all shadow-md hover:shadow-lg focus:bg-amber-700 focus:shadow-none active:bg-amber-700 hover:bg-amber-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2" type="button">
-                                    <fa-icon class="me-1.5" [icon]="faPencil"></fa-icon>
-                                  Actualizar
+                                <button (click)="update()" class="rounded-md bg-amber-600 py-2 px-4 border border-transparent transition-all shadow-md hover:shadow-lg focus:bg-amber-700 focus:shadow-none active:bg-amber-700 hover:bg-amber-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+                                    <fa-icon class="me-1.5 text-slate-800" [icon]="faPencil"></fa-icon>
                                 </button>
-                                <button class="rounded-md bg-red-600 py-2 px-4 border border-transparent text-center text-sm text-white font-semibold transition-all shadow-md hover:shadow-lg focus:bg-red-700 focus:shadow-none active:bg-red-700 hover:bg-red-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2" type="button">
-                                    <fa-icon class="me-1.5" [icon]="faTrash"></fa-icon>
-                                    Eliminar
+                                <button class="rounded-md bg-red-600 py-2 px-4 border border-transparent transition-all shadow-md hover:shadow-lg focus:bg-red-700 focus:shadow-none active:bg-red-700 hover:bg-red-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+                                    <fa-icon class="me-1.5 text-white" [icon]="faTrash"></fa-icon>
                                 </button>
-                              </div>
+                            </div>
                         </td>
                     </tr>
                 } @empty {
