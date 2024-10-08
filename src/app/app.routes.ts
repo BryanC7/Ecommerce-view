@@ -6,6 +6,10 @@ import { RoleGuard } from './core/guards/role.guard';
 export const routes: Routes = [
     {
         path: '',
+        loadComponent: () => import('./business/home/home.component')
+    },
+    {
+        path: 'user',
         loadComponent: () => import('./shared/components/layout/layout.component'),
         children: [
             {
