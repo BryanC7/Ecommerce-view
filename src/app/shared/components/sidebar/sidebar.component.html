@@ -14,7 +14,7 @@
     <div class="m-4">
       <ul class="mb-4 flex flex-col gap-1">
         <li>
-          <a routerLink="/profile">
+          <a routerLink="/user/profile">
             <button routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]" class="middle none font-sans font-bold center transition-all text-white disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg  w-full flex items-center gap-4 px-4 capitalize" type="button">
               <fa-icon [icon]="faUser"></fa-icon>
               <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Perfil</p>
@@ -22,7 +22,7 @@
           </a>
         </li>
         <li *ngIf="isAdmin">
-          <a aria-current="page" class="active" routerLink="/dashboard">
+          <a aria-current="page" class="active" routerLink="/user/dashboard">
             <button routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]" class="middle none font-sans font-bold center transition-all text-white disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg  w-full flex items-center gap-4 px-4 capitalize" type="button">
               <fa-icon [icon]="faHome"></fa-icon>
               <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Fichero de Actividades</p>
@@ -30,7 +30,7 @@
           </a>
         </li>
         <li *ngIf="isAdmin">
-          <a routerLink="/tables">
+          <a routerLink="/user/tables">
             <button routerLinkActive="bg-gradient-to-tr from-blue-600 to-blue-400 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85]" class="middle none font-sans font-bold center transition-all text-white disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg  w-full flex items-center gap-4 px-4 capitalize" type="button">
               <fa-icon [icon]="faTable"></fa-icon>
               <p class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">Tablas</p>
